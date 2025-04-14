@@ -1,13 +1,16 @@
-import { Geist, Geist_Mono } from "next/font/google";
-import "@/app/styles/globals.css";
+import { Gideon_Roman, Roboto } from "next/font/google";
+import "@/styles/globals.css";
+import MainNav from "@/components/MainNav";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+
+const gideon = Gideon_Roman({
+  variable: "--font-gideon",
   subsets: ["latin"],
+  weight: "400",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const roboto = Roboto({
+  variable: "--font-roboto",
   subsets: ["latin"],
 });
 
@@ -19,9 +22,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${gideon.variable} ${roboto.variable}`}> 
+        <MainNav/>
         {children}
       </body>
     </html>
