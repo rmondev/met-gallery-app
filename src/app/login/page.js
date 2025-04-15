@@ -2,10 +2,10 @@
 import React from 'react'
 import { authenticateUser } from '@/lib/authenticate'
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 
 const Login = () => {
 
-    const [warning, setWarning] = useState('');
     const router = useRouter()
 
     const handleSubmit = async (formData) => {
@@ -16,9 +16,10 @@ const Login = () => {
 
         try {
             await authenticateUser(user, pass)
+            toast.success(`${user} Successfully Logged In!`)
             router.push('/')
         } catch(error) {
-            console.error('Error Authenticating User: ', error)
+            toast.error(error.message)
         }
     }
 

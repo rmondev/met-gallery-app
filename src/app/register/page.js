@@ -1,6 +1,8 @@
 'use client'
 import React from 'react'
 import {useRouter} from 'next/navigation'
+import { toast } from 'react-toastify'
+import { registerUser } from '@/lib/authenticate'
 
 const Register = () => {
 
@@ -10,9 +12,17 @@ const Register = () => {
           let user = formData.get('user')
           let pass = formData.get('pass')
           let passConfirm = formData.get('passConfirm')
+          
+          console.log(`Login Info: (User): ${user} (Pass): ${pass} (PassConfirm): ${passConfirm}`)
   
-          // console.log(`Login Info: (User): ${user} (Pass): ${pass}`)
-  
+          try {
+            await registerUser(user, pass, passConfirm);
+            toast.success(`Successfully Registered ${user}!`)
+            router.push('/login');
+          } catch (error) {
+            toast.error(error.message)
+          }
+
       }
   return (
     <main className='flex flex-col h-screen w-full bg-white'>

@@ -22,6 +22,7 @@ export default function Home() {
           width={0}
           height={0}
           sizes="100vw"
+          priority
           className="w-full max-w-[1150px] h-auto rounded-2xl"
         />
       </section>

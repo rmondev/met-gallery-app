@@ -1,6 +1,7 @@
 import { Gideon_Roman, Roboto } from "next/font/google";
 import "@/styles/globals.css";
 import MainNav from "@/components/MainNav";
+import { ToastContainer } from 'react-toastify';
 
 
 const gideon = Gideon_Roman({
@@ -25,6 +26,17 @@ export default function RootLayout({ children }) {
       <body className={`${gideon.variable} ${roboto.variable}`}> 
         <MainNav/>
         {children}
+        <ToastContainer 
+          position="bottom-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          // theme="light"
+        />
       </body>
     </html>
   );
