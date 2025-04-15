@@ -6,6 +6,7 @@ import MetLogo from '@/public/The_Metropolitan_Museum_of_Art_Logo.svg'
 import { RiArrowDropDownFill } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AnimatePresence, motion } from 'framer-motion'
+import { removeToken, readToken } from '@/lib/authenticate';
 
 const MainNav = () => {
   
@@ -16,6 +17,9 @@ const MainNav = () => {
   const arrowDivRef = useRef(null)
   const mobileMenuRef = useRef(null)
   const hamburgerRef = useRef(null)
+
+  // let token = readToken()
+  let token = true
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -97,48 +101,53 @@ const MainNav = () => {
       </section>
 
       {/* Middle Section */}
-      <section className='hidden xl:flex flex-row gap-2 w-fit'>
-        <ul className='flex justify-center items-center flex-row gap-4'>
-            <li className='text-white text-lg'><Link href='/'>Home</Link></li>
-            <li className='text-white text-lg'><Link href='/search'>Advanced Search</Link></li>
-        </ul>
-      </section>
+      {token && (
+        <section className='hidden xl:flex flex-row gap-2 w-fit'>
+          <ul className='flex justify-center items-center flex-row gap-4'>
+              <li className='text-white text-lg hover:font-semibold'><Link href='/'>Home</Link></li>
+              <li className='text-white text-lg hover:font-semibold'><Link href='/search'>Advanced Search</Link></li>
+          </ul>
+        </section>
+      )}
+
+
+
+
 
       {/* Right Section */}
-      <section className='hidden xl:flex flex-row justify-center items-center gap-2 w-fit'>
-        <form className='flex flex-row gap-2' action={handleSubmit}>
 
-          <input 
-            className='border border-white bg-white p-4 rounded w-full text-black h-10'
-            placeholder='Search'
-            type='text'
-            name='query'
-            />
+      {token ? (
+        <>
+          <section className='hidden xl:flex flex-row justify-center items-center gap-2 w-fit'>
+            <form className='flex flex-row gap-2' action={handleSubmit}>
+              <input 
+                className='border border-white bg-white p-4 rounded w-full text-black h-10'
+                placeholder='Search'
+                type='text'
+                name='query'
+                />
+              <button className='text-white border-2 rounded mr-2 w-30 border-white hover:bg-white hover:text-red-600 h-10'>
+                Search
+              </button>
+            </form>
 
-          <button className='text-white border-2 rounded mr-2 w-30 border-white h-10'>
-            Search
-          </button>
+            {/* Arrow Div */}
+            <div 
+              className='flex flex-col'
+              ref={arrowDivRef}
+              >
+                <div onClick={handleDropdown}className='cursor-pointer flex flex-row justify-center items-center text-lg'>
+                <p className='hover:text-white text-slate-300'>
+                  rmondev
+                </p>
+                <RiArrowDropDownFill 
+                  color={dropdownOpen ? 'black' : 'white'}
+                  size={36}/>
+                </div>
+              </div>
 
-          
-        </form>
-
-        {/* Arrow Div */}
-        <div 
-          className='flex flex-col'
-          ref={arrowDivRef}
-          >
-            <div onClick={handleDropdown}className='cursor-pointer flex flex-row justify-center items-center text-lg'>
-            <p className='hover:text-white text-slate-300'>
-              rmondev
-            </p>
-            <RiArrowDropDownFill 
-              color={dropdownOpen ? 'black' : 'white'}
-              size={36}/>
-            </div>
-          </div>
-
-        {/* Dropdown Menu */}
-        {dropdownOpen &&
+            {/* Dropdown Menu */}
+            {dropdownOpen &&
               <div ref={dropdownRef} className='absolute bg-white top-18 right-2 border-2 border-red-600 rounded p-2 w-[200px]'>
                 <ul>
                   <li className='p-2 border-2 font-semibold border-red-600 bg-white hover:bg-red-600 hover:text-white text-red-600 rounded m-2'>Favourites</li>
@@ -147,14 +156,25 @@ const MainNav = () => {
                 </ul>
               </div>
             }
-
+          </section>
+        </>
+      ) : (
+        // No User Logged in (null token)
+        <section className='hidden xl:flex flex-row gap-4 justify-center items-center mr-4'>
+           <Link href="/register">
+              <button className='cursor-pointer text-white text-lg hover:font-semibold'>Register</button>
+            </Link>
+            <Link href="/login">
+              <button className='cursor-pointer text-white text-lg hover:font-semibold'>Login</button>
+            </Link>
+        </section>
+      )}
           
-      </section>
 
       {/* Mobile Menu Icon */}
       <div 
         ref={hamburgerRef}
-        className="cursor-pointer xl:hidden flex justify-center items-center p-2"
+        className="cursor-pointer xl:hidden flex justify-center items-center p-4"
         onClick={handleMobileMenu}
       >
             <GiHamburgerMenu size={30} color={mobileMenuOpen ? 'black' : 'white'}/>
@@ -168,17 +188,37 @@ const MainNav = () => {
         {mobileMenuOpen && (
           <motion.div 
             ref={mobileMenuRef}
-            className='absolute xl:hidden flex flex-col gap-4 items-center w-full bg-red-600'
+            className='absolute xl:hidden flex flex-col gap-4 items-center w-full bg-red-600 p-4'
             initial="hidden"
             animate="visible"
             exit="hidden"
             variants={dropdownVariants}
             >
-              
-                <Link href='/' className="text-white text-lg py-2">Home</Link>
-                <Link href='/search' className="text-white text-lg py-2">Advanced Search</Link>
+
+
+              {token ? (
+              <>
+                <Link href='/' className="text-white text-lg py-2">
+                  <button className='text-white text-lg py-2 hover:font-semibold'>Home</button>
+                </Link>
+                <Link href='/search'>
+                  <button className='text-white text-lg py-2 hover:font-semibold'>Advanced Search</button>
+                </Link>
                 <button className="text-white text-left text-lg py-2">Logout</button>
-             
+              </>
+            ) : (
+              <>
+                 <Link href="/register">
+                  <button className='cursor-pointer text-white text-lg hover:font-semibold'>Register</button>
+                </Link>
+                <Link href="/login">
+                  <button className='cursor-pointer text-white text-lg hover:font-semibold'>Login</button>
+                </Link>
+              </>
+            )}
+
+
+
           </motion.div>
         )}
       </AnimatePresence>

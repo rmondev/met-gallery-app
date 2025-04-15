@@ -10,6 +10,10 @@ export default function Home() {
 
   return (
     <main className='flex flex-col h-screen w-full bg-white'>
+      {/* Title Container */}
+      <div className='flex justify-center items-center text-center bg-transparent mt-10'>
+          <p className='font-gideon font-bold text-red-600 text-5xl'>The Metropolitan Museum of Art</p>
+      </div>
       <section className='flex justify-center items-center m-10'>
         <Image
           src={MetFacadeImage}
@@ -17,7 +21,7 @@ export default function Home() {
           width={0}
           height={0}
           sizes="100vw"
-          className="w-full max-w-[1150px] h-auto"
+          className="w-full max-w-[1150px] h-auto rounded-2xl"
         />
       </section>
       <section className="grid grid-cols-1 md:grid-cols-4 gap-10 px-6 py-12 max-w-[1500px] mx-auto">
