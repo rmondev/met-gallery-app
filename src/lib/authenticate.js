@@ -1,4 +1,4 @@
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 export async function registerUser(user, password, password2) {
     const res = await fetch(`${process.env.NEXT_PUBLIC_USER_API_URL}/register`, {
@@ -38,8 +38,10 @@ export async function authenticateUser(user, password) {
 }
 
 function setToken(token) {
-    localStorage.setItem('access_token', token);
+  localStorage.setItem('access_token', token);
+  window.dispatchEvent(new Event('token-change')); // 👈 triggers reactivity in MainNav
 }
+
 
 
 export function getToken() {
@@ -56,11 +58,33 @@ export function removeToken() {
 }
 
 
+// export function readToken() {
+//   try {
+//     const token = getToken();
+//     console.log("Inside readToken()")
+//     console.log("Jwt token: ", jwtDecode(token))
+//     return token ? jwtDecode(token) : null;
+
+    
+//   } catch (err) {
+//     // Error is triggered here
+//     console.log("Error Territory: ", err)
+//     return null;
+//   }
+// }
+
 export function readToken() {
   try {
     const token = getToken();
-    return token ? jwt_decode(token) : null;
+
+    if (!token || typeof token !== 'string') {
+      return null;
+    }
+
+    console.log("Jwt token:", token);
+    return jwtDecode(token);
   } catch (err) {
+    console.log("Error Territory:", err);
     return null;
   }
 }

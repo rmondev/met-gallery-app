@@ -5,13 +5,14 @@ import { useRouter } from 'next/navigation'
 
 const Login = () => {
 
+    const [warning, setWarning] = useState('');
     const router = useRouter()
 
     const handleSubmit = async (formData) => {
         let user = formData.get('user')
         let pass = formData.get('pass')
 
-        console.log(`Login Info: (User): ${user} (Pass): ${pass}`)
+        // console.log(`Login Info: (User): ${user} (Pass): ${pass}`)
 
         try {
             await authenticateUser(user, pass)
@@ -20,6 +21,7 @@ const Login = () => {
             console.error('Error Authenticating User: ', error)
         }
     }
+
   return (
     <main className='flex flex-col h-screen w-full bg-white'>
       <section className='flex flex-col justify-center items-center mt-10 gap-6'>
@@ -44,6 +46,8 @@ const Login = () => {
                     // placeholder='Search'
                     type='text'
                     name='user'
+                    autocomplete="username"
+                    required
                 >
                 </input>
             </div>
@@ -56,13 +60,15 @@ const Login = () => {
                     // placeholder='Search'
                     type='text'
                     name='pass'
+                    autocomplete="current-password"
+                    required
                 >
                 </input>
             </div>
 
             {/* Submit Button Container */}
             <div>
-                <button className='text-red-600 hover:text-white border-2 rounded mr-2 w-30 border-red-600 bg-white hover:bg-red-600  h-10'>
+                <button type='submit' className='text-red-600 hover:text-white border-2 rounded mr-2 w-30 border-red-600 bg-white hover:bg-red-600  h-10'>
                     Login
                 </button>
             </div>

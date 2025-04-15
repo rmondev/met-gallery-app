@@ -7,19 +7,17 @@ import { RiArrowDropDownFill } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AnimatePresence, motion } from 'framer-motion'
 import { removeToken, readToken } from '@/lib/authenticate';
+import { useRouter } from 'next/navigation'
 
 const MainNav = () => {
   
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [user, setUser] = useState(true)
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const dropdownRef = useRef(null)
   const arrowDivRef = useRef(null)
   const mobileMenuRef = useRef(null)
   const hamburgerRef = useRef(null)
-
-  let token = readToken()
-  // let token = true
+  const router = useRouter()
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -54,11 +52,12 @@ const MainNav = () => {
   
   const handleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen)
-    console.log('Mobile Menu Open? : ', mobileMenuOpen)
   }
 
   const logOut = () => {
     removeToken()
+    setToken(null)
+    setDropdownOpen(false)
     router.push('/login')
   }
 
@@ -82,6 +81,40 @@ const MainNav = () => {
       }
     }
   }
+
+
+
+  const [token, setToken] = useState(null)
+  const [hasMounted, setHasMounted] = useState(false)
+
+  useEffect(() => {
+    const updateToken = () => {
+      const decoded = readToken()
+      setToken(decoded || null)
+    }
+  
+    updateToken() // initial load
+    window.addEventListener('token-change', updateToken)
+  
+    return () => window.removeEventListener('token-change', updateToken)
+  }, [])
+  
+
+
+  useEffect(() => {
+    try {
+      const decoded = readToken()
+      setToken(decoded || null)
+    } catch {
+      setToken(null)
+    } finally {
+      setHasMounted(true)
+    }
+  }, [])
+
+  if (!hasMounted) return null
+
+
 
   return (
     <nav className='sticky top-0 z-50 flex-col'>
@@ -130,7 +163,7 @@ const MainNav = () => {
                 type='text'
                 name='query'
                 />
-              <button className='text-white border-2 rounded mr-2 w-30 border-white hover:bg-white hover:text-red-600 h-10'>
+              <button type='submit' className='text-white border-2 rounded mr-2 w-30 border-white hover:bg-white hover:text-red-600 h-10'>
                 Search
               </button>
             </form>
@@ -142,7 +175,7 @@ const MainNav = () => {
               >
                 <div onClick={handleDropdown}className='cursor-pointer flex flex-row justify-center items-center text-lg'>
                 <p className='hover:text-white text-slate-300'>
-                  rmondev
+                  {token.userName}
                 </p>
                 <RiArrowDropDownFill 
                   color={dropdownOpen ? 'black' : 'white'}
