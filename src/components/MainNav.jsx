@@ -132,7 +132,7 @@ const MainNav = () => {
               rmondev
             </p>
             <RiArrowDropDownFill 
-              color='white'
+              color={dropdownOpen ? 'black' : 'white'}
               size={36}/>
             </div>
           </div>
@@ -154,10 +154,10 @@ const MainNav = () => {
       {/* Mobile Menu Icon */}
       <div 
         ref={hamburgerRef}
-        className="md:hidden flex justify-center items-center p-2"
+        className="cursor-pointer xl:hidden flex justify-center items-center p-2"
         onClick={handleMobileMenu}
       >
-            <GiHamburgerMenu size={30} color='white'/>
+            <GiHamburgerMenu size={30} color={mobileMenuOpen ? 'black' : 'white'}/>
       </div>
 
       
@@ -168,7 +168,7 @@ const MainNav = () => {
         {mobileMenuOpen && (
           <motion.div 
             ref={mobileMenuRef}
-            className=' md:hidden flex flex-col gap-4 items-center w-full bg-red-600'
+            className='absolute xl:hidden flex flex-col gap-4 items-center w-full bg-red-600'
             initial="hidden"
             animate="visible"
             exit="hidden"
