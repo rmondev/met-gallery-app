@@ -14,6 +14,7 @@ export default function Home() {
       <div className='flex justify-center items-center text-center bg-transparent mt-10'>
           <p className='font-gideon font-bold text-red-600 text-5xl'>The Metropolitan Museum of Art</p>
       </div>
+      {/* Image Container */}
       <section className='flex justify-center items-center m-10'>
         <Image
           src={MetFacadeImage}

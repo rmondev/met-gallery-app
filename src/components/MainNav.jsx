@@ -18,8 +18,8 @@ const MainNav = () => {
   const mobileMenuRef = useRef(null)
   const hamburgerRef = useRef(null)
 
-  // let token = readToken()
-  let token = true
+  let token = readToken()
+  // let token = true
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -28,7 +28,6 @@ const MainNav = () => {
       const clickedOutsideMobileMenu = mobileMenuRef.current && !mobileMenuRef.current.contains(event.target)
       const clickedOutsideHamburger = hamburgerRef.current && !hamburgerRef.current.contains(event.target)
       
-
       if (clickedOutsideDropdown && clickedOutsideArrowDiv) {
         setDropdownOpen(false)
       }
@@ -56,6 +55,11 @@ const MainNav = () => {
   const handleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen)
     console.log('Mobile Menu Open? : ', mobileMenuOpen)
+  }
+
+  const logOut = () => {
+    removeToken()
+    router.push('/login')
   }
 
   const dropdownVariants = {
@@ -152,7 +156,10 @@ const MainNav = () => {
                 <ul>
                   <li className='p-2 border-2 font-semibold border-red-600 bg-white hover:bg-red-600 hover:text-white text-red-600 rounded m-2'>Favourites</li>
                   <li className='p-2 border-2 font-semibold border-red-600 bg-white hover:bg-red-600 hover:text-white text-red-600 rounded m-2'>Search History</li>
-                  <li className='p-2 border-2 font-semibold border-red-600 bg-white hover:bg-red-600 hover:text-white text-red-600 rounded m-2'>Logout</li>
+                  <li className='p-2 border-2 font-semibold border-red-600 bg-white hover:bg-red-600 hover:text-white text-red-600 rounded m-2'
+                    onClick={logOut}
+                    >
+                      Logout</li>
                 </ul>
               </div>
             }
@@ -204,7 +211,10 @@ const MainNav = () => {
                 <Link href='/search'>
                   <button className='text-white text-lg py-2 hover:font-semibold'>Advanced Search</button>
                 </Link>
-                <button className="text-white text-left text-lg py-2">Logout</button>
+                <button className="text-white text-left text-lg py-2"
+                  onClick={logOut}
+                  >
+                    Logout</button>
               </>
             ) : (
               <>
