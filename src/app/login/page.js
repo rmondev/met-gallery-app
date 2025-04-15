@@ -46,7 +46,7 @@ const Login = () => {
                     // placeholder='Search'
                     type='text'
                     name='user'
-                    autocomplete="username"
+                    autoComplete="username"
                     required
                 >
                 </input>
@@ -60,7 +60,7 @@ const Login = () => {
                     // placeholder='Search'
                     type='text'
                     name='pass'
-                    autocomplete="current-password"
+                    autoComplete="current-password"
                     required
                 >
                 </input>

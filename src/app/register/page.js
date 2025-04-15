@@ -38,7 +38,7 @@ const Register = () => {
                     // placeholder='Search'
                     type='text'
                     name='user'
-                    autocomplete="username"
+                    autoComplete="username"
                     required
                 >
                 </input>
@@ -52,7 +52,7 @@ const Register = () => {
                     // placeholder='Search'
                     type='password'
                     name='pass'
-                    autocomplete="current-password"
+                    autoComplete="current-password"
                     required
                 >
                 </input>
@@ -67,7 +67,7 @@ const Register = () => {
                     // placeholder='Search'
                     type='password'
                     name='passConfirm'
-                    autocomplete="current-password"
+                    autoComplete="current-password"
                     required
                 >
                 </input>
