@@ -43,7 +43,11 @@ const MainNav = () => {
   
   const handleSubmit = async (formData) => {
     let query = formData.get('query')
-    console.log(query)
+    let queryRoute = `/artwork?`
+    let queryString = `title=true&q=${query}`
+    router.push(`${queryRoute}${queryString}`)
+    
+    // TODO: add queryString to SearchHistory
   }
 
   const handleDropdown = () => {
