@@ -58,6 +58,7 @@ const MainNav = () => {
     removeToken()
     setToken(null)
     setDropdownOpen(false)
+    setMobileMenuOpen(false)
     router.push('/login')
   }
 
@@ -99,6 +100,10 @@ const MainNav = () => {
     return () => window.removeEventListener('token-change', updateToken)
   }, [])
   
+  const handleMobileDropDownLinkClick = (route) =>{
+    setMobileMenuOpen(false)
+    router.push(route)
+  }
 
 
   useEffect(() => {
@@ -123,13 +128,17 @@ const MainNav = () => {
       {/* Left Section */}
       <section className='flex flex-row justify-start gap-2 w-fit'>
           {/* Logo Container */}
-          <div className='flex justify-center items-center bg-white m-2 p-2 rounded'>
-              <Image
-                  src={MetLogo}
-                  width={55}
-                  alt='met-app-logo'
-              />
-          </div>
+        
+            <div className='cursor-pointer flex justify-center items-center bg-white m-2 p-2 rounded'>
+              <Link href="/">
+                <Image
+                    src={MetLogo}
+                    width={55}
+                    alt='met-app-logo'
+                />
+              </Link>
+            </div>
+          
 
           {/* Title Container */}
           <div className='hidden xl:flex justify-center items-center bg-transparent'>
@@ -239,24 +248,24 @@ const MainNav = () => {
               {token ? (
               <>
                 <Link href='/' className="text-white text-lg py-2">
-                  <button className='text-white text-lg py-2 hover:font-semibold'>Home</button>
+                  <button className='cursor-pointer text-white text-lg py-2 hover:font-semibold'>Home</button>
                 </Link>
                 <Link href='/search'>
-                  <button className='text-white text-lg py-2 hover:font-semibold'>Advanced Search</button>
+                  <button className='cursor-pointer text-white text-lg py-2 hover:font-semibold'>Advanced Search</button>
                 </Link>
-                <button className="text-white text-left text-lg py-2"
+                <button className="cursor-pointer text-white text-lg py-2 hover:font-semibold"
                   onClick={logOut}
                   >
                     Logout</button>
               </>
             ) : (
               <>
-                 <Link href="/register">
-                  <button className='cursor-pointer text-white text-lg hover:font-semibold'>Register</button>
-                </Link>
-                <Link href="/login">
-                  <button className='cursor-pointer text-white text-lg hover:font-semibold'>Login</button>
-                </Link>
+                 {/* <Link href="/register"> */}
+                  <button onClick={()=>handleMobileDropDownLinkClick('/register')}className='cursor-pointer text-white text-lg hover:font-semibold'>Register</button>
+                {/* </Link> */}
+                {/* <Link href="/login"> */}
+                  <button onClick={()=>handleMobileDropDownLinkClick('/login')}className='cursor-pointer text-white text-lg hover:font-semibold'>Login</button>
+                {/* </Link> */}
               </>
             )}
 

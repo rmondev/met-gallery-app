@@ -59,7 +59,7 @@ const Login = () => {
                 </label>
                 <input className='border border-slate-300 bg-white h-10 p-4'
                     // placeholder='Search'
-                    type='text'
+                    type='password'
                     name='pass'
                     autoComplete="current-password"
                     required
