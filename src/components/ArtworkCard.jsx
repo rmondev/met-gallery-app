@@ -19,7 +19,7 @@ const ArtworkCard = ({objectId}) => {
 
             fetchObjectData()
         }
-    }, [onjectId])
+    }, [objectId])
 
     if (!cardData) return null
 
