@@ -1,6 +1,7 @@
 'use client'
 import React, {useEffect, useState} from 'react'
 import Image from 'next/image'
+import ArtworkCard from '@/components/ArtworkCard'
 
 const ArtworkCard = ({objectId}) => {
 
@@ -9,14 +10,18 @@ const ArtworkCard = ({objectId}) => {
         fetchObjectData = async () => {
             try {
                 let response = await fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectId}`)
-                let data = response.json
+                let data = response.json()
                 console.log(data)
                 setCardData(data)
             } catch (error) {
                 console.log(error)
             }
+
+            fetchObjectData()
         }
-    }, [])
+    }, [onjectId])
+
+    if (!cardData) return null
 
   return (
     <>
