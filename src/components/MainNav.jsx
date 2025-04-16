@@ -41,8 +41,8 @@ const MainNav = () => {
     }
   }, [])
   
-  const handleSubmit = (formData) => {
-    query = formData.get('query')
+  const handleSubmit = async (formData) => {
+    let query = formData.get('query')
     console.log(query)
   }
 
@@ -247,12 +247,35 @@ const MainNav = () => {
 
               {token ? (
               <>
-                <Link href='/' className="text-white text-lg py-2">
+                <form className='flex flex-row gap-2' action={handleSubmit}>
+                  <input 
+                    className='border border-white bg-white p-4 rounded w-full text-black h-10'
+                    placeholder='Search'
+                    type='text'
+                    name='query'
+                    />
+                  <button type='submit' className='text-white border-2 rounded mr-2 w-30 border-white hover:bg-white hover:text-red-600 h-10'>
+                    Search
+                  </button>
+                </form>
+                <Link href='/'>
                   <button className='cursor-pointer text-white text-lg py-2 hover:font-semibold'>Home</button>
                 </Link>
+
+                <Link href='/favourites'>
+                  <button className='cursor-pointer text-white text-lg py-2 hover:font-semibold'>Favourites</button>
+                </Link>
+
+                <Link href='/history'>
+                  <button className='cursor-pointer text-white text-lg py-2 hover:font-semibold'>Search History</button>
+                </Link>
+
                 <Link href='/search'>
                   <button className='cursor-pointer text-white text-lg py-2 hover:font-semibold'>Advanced Search</button>
                 </Link>
+
+                
+
                 <button className="cursor-pointer text-white text-lg py-2 hover:font-semibold"
                   onClick={logOut}
                   >
