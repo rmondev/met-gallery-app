@@ -81,10 +81,9 @@ export function readToken() {
       return null;
     }
 
-    console.log("Jwt token:", token);
     return jwtDecode(token);
   } catch (err) {
-    console.log("Error Territory:", err);
+    console.log("JWT Token Decode Error", err);
     return null;
   }
 }
