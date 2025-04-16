@@ -36,6 +36,7 @@ const Artwork = () => {
         paginated.push(filteredResults.slice(i, i + PER_PAGE))
       }
       setArtworkList(paginated)
+      console.log(paginated)
     }
   }, [data])
 
@@ -49,7 +50,7 @@ const Artwork = () => {
 
   return (
     <div className='p-4'>
-      <h1 className='text-2xl font-bold mb-4'>Search Results</h1>
+      <h1 className='text-2xl text-red-600 font-bold mb-4'>Search Results</h1>
 
       {/* Artwork Grid */}
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
@@ -60,11 +61,11 @@ const Artwork = () => {
 
       {/* Pagination Controls */}
       {artworkList.length > 1 && (
-        <div className='flex justify-center gap-4 mt-8'>
+        <div className='flex justify-center items-center gap-4 mt-8'>
           <button
             onClick={() => handlePageChange('prev')}
             disabled={currentPage === 0}
-            className='px-4 py-2 border rounded disabled:opacity-50'
+            className='cursor-pointer px-4 py-2 border-2 rounded disabled:opacity-50 bg-white border-red-600 text-red-600 hover:bg-red-600 hover:text-white'
           >
             Prev
           </button>
@@ -72,7 +73,7 @@ const Artwork = () => {
           <button
             onClick={() => handlePageChange('next')}
             disabled={currentPage === artworkList.length - 1}
-            className='px-4 py-2 border rounded disabled:opacity-50'
+            className='cursor-pointer px-4 py-2 border-2 rounded disabled:opacity-50 bg-white border-red-600 text-red-600 hover:bg-red-600 hover:text-white'
           >
             Next
           </button>

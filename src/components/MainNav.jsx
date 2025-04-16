@@ -45,6 +45,7 @@ const MainNav = () => {
     let query = formData.get('query')
     let queryRoute = `/artwork?`
     let queryString = `title=true&q=${query}`
+    setMobileMenuOpen(false)
     router.push(`${queryRoute}${queryString}`)
     
     // TODO: add queryString to SearchHistory
