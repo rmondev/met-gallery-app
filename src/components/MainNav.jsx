@@ -201,9 +201,9 @@ const MainNav = () => {
             {dropdownOpen &&
               <div ref={dropdownRef} className='absolute bg-white top-18 right-2 border-2 border-red-600 rounded p-2 w-[200px]'>
                 <ul>
-                  <li className='p-2 border-2 font-semibold border-red-600 bg-white hover:bg-red-600 hover:text-white text-red-600 rounded m-2'>Favourites</li>
-                  <li className='p-2 border-2 font-semibold border-red-600 bg-white hover:bg-red-600 hover:text-white text-red-600 rounded m-2'>Search History</li>
-                  <li className='p-2 border-2 font-semibold border-red-600 bg-white hover:bg-red-600 hover:text-white text-red-600 rounded m-2'
+                  <li className='cursor-pointer p-2 border-2 font-semibold border-red-600 bg-white hover:bg-red-600 hover:text-white text-red-600 rounded m-2'>Favourites</li>
+                  <li className='cursor-pointer p-2 border-2 font-semibold border-red-600 bg-white hover:bg-red-600 hover:text-white text-red-600 rounded m-2'>Search History</li>
+                  <li className='cursor-pointer p-2 border-2 font-semibold border-red-600 bg-white hover:bg-red-600 hover:text-white text-red-600 rounded m-2'
                     onClick={logOut}
                     >
                       Logout</li>
