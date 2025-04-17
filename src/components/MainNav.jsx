@@ -263,24 +263,10 @@ const MainNav = () => {
                     Search
                   </button>
                 </form>
-                <Link href='/'>
-                  <button className='cursor-pointer text-white text-lg py-2 hover:font-semibold'>Home</button>
-                </Link>
-
-                <Link href='/favourites'>
-                  <button className='cursor-pointer text-white text-lg py-2 hover:font-semibold'>Favourites</button>
-                </Link>
-
-                <Link href='/history'>
-                  <button className='cursor-pointer text-white text-lg py-2 hover:font-semibold'>Search History</button>
-                </Link>
-
-                <Link href='/search'>
-                  <button className='cursor-pointer text-white text-lg py-2 hover:font-semibold'>Advanced Search</button>
-                </Link>
-
-                
-
+                  <button onClick={()=>handleMobileDropDownLinkClick('/')} className='cursor-pointer text-white text-lg py-2 hover:font-semibold'>Home</button>
+                  <button onClick={()=>handleMobileDropDownLinkClick('/favourites')} className='cursor-pointer text-white text-lg py-2 hover:font-semibold'>Favourites</button>
+                  <button onClick={()=>handleMobileDropDownLinkClick('/history')} className='cursor-pointer text-white text-lg py-2 hover:font-semibold'>Search History</button>
+                  <button onClick={()=>handleMobileDropDownLinkClick('/search')} className='cursor-pointer text-white text-lg py-2 hover:font-semibold'>Advanced Search</button>
                 <button className="cursor-pointer text-white text-lg py-2 hover:font-semibold"
                   onClick={logOut}
                   >

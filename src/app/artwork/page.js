@@ -29,16 +29,25 @@ const Artwork = () => {
 
   // Paginate the filtered valid object IDs
   useEffect(() => {
-    if (data?.objectIDs?.length) {
-      const filteredResults = validObjectIDList.objectIDs.filter(id => data.objectIDs.includes(id))
+    if (data?.objectIDs) {
+      const filteredResults = validObjectIDList.objectIDs.filter(id =>
+        data.objectIDs.includes(id)
+      )
+  
+      if (filteredResults.length === 0) {
+        setArtworkList([]) // trigger "No Results"
+        return
+      }
+  
       const paginated = []
       for (let i = 0; i < filteredResults.length; i += PER_PAGE) {
         paginated.push(filteredResults.slice(i, i + PER_PAGE))
       }
+  
       setArtworkList(paginated)
-      console.log(paginated)
     }
   }, [data])
+  
 
   const handlePageChange = (direction) => {
     if (direction === 'next' && currentPage < artworkList.length - 1) {
@@ -48,7 +57,17 @@ const Artwork = () => {
     }
   }
 
+  if (data && (!data.objectIDs || data.objectIDs.length === 0 || artworkList.length === 0)) {
+    return (
+      <div className='flex justify-center items-center h-64'>
+        <h1 className='text-xl font-semibold text-gray-600'>No Results Found</h1>
+      </div>
+    )
+  }
+
   return (
+
+    
     <div className='p-4'>
       <h1 className='text-2xl text-red-600 font-bold mb-4'>Search Results</h1>
 
