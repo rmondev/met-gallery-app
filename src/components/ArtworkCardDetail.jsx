@@ -69,9 +69,27 @@ const ArtworkCardDetail = ({objectId}) => {
             {cardData.creditLine ? <p><strong>Credit: </strong>{cardData.creditLine}</p> : <p><strong>Credit: </strong>N/A</p>}
             {cardData.dimensions ? <p><strong>Dimensions: </strong>{cardData.dimensions}</p> : <p><strong>Dimensions: </strong>N/A</p>}
             {cardData.artistDisplayBio ? <p><strong>Artist or Display Bio: </strong>{cardData.artistDisplayBio}</p> : <p><strong>Artist or Display Bio: </strong>N/A</p>}
+            {cardData.country ? <p><strong>Country of Origin: </strong>{cardData.country}</p> : <p><strong>Country of Origin: </strong>N/A</p>}
 
             {cardData.department ? <p><strong>Department: </strong>{cardData.department}</p> : <p><strong>Department: </strong>N/A</p>}
 
+            
+             {/* Additional Images */}
+                {cardData.additionalImages?.length > 0 && (
+                <div className='w-full gap-2'>
+                    <p className=''><strong>Additional Images: </strong></p>
+                    <div className='flex flex-wrap gap-2'>
+                    {cardData.additionalImages.map((img, index) => (
+                        <img
+                        key={index}
+                        src={img}
+                        alt={`Additional image ${index + 1}`}
+                        className='w-60 h-auto m-4 border border-gray-300 rounded'
+                        />
+                    ))}
+                    </div>
+                </div>
+                )}
             
             <br></br>
             <button className='cursor-pointer px-4 py-2 border-2 rounded bg-white border-red-600 text-red-600 hover:bg-red-600 hover:text-white'>+ Favourite (added)</button>

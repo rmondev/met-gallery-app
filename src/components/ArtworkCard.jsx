@@ -29,14 +29,18 @@ const ArtworkCard = ({ objectId }) => {
      
       <section className='w-full flex justify-center items-center'>
         {cardData.primaryImageSmall ? (
-            <img
-            alt='artwork'
-            src={cardData.primaryImageSmall}
-            width={200}
-            height={300}
-            style={{ height: 'auto' }}
-            className='border border-red-600'
-            />
+          <Link
+            href={`/artwork/${objectId}`}
+            >
+              <img
+                alt='artwork'
+                src={cardData.primaryImageSmall}
+                width={200}
+                height={300}
+                style={{ height: 'auto' }}
+                className='border border-red-600'
+              />
+            </Link>
         ) : (
             <img
             alt='Not available'
@@ -46,6 +50,7 @@ const ArtworkCard = ({ objectId }) => {
             style={{ height: 'auto' }}
             className='border border-red-600'
           />
+          
         )}
       </section>
     
