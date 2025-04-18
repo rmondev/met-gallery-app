@@ -27,7 +27,7 @@ const ArtworkCardDetail = ({objectId}) => {
   return (
     <div className='flex flex-col border-2 rounded border-red-600 justify-start items-start gap-2 p-4'>
 
-<h2>    <strong>Title: </strong>{cardData.title || 'N/A'}</h2>
+    <h2><strong>Title: </strong>{cardData.title || 'N/A'}</h2>
         {/* Full-size image */}
         <section className='w-full flex justify-center items-center overflow-auto'>
             {cardData.primaryImage ? (
@@ -49,11 +49,13 @@ const ArtworkCardDetail = ({objectId}) => {
          {/* Details */}
 
          <section className='flex flex-col justify-start items-start text-left gap-2'>
+            {cardData.objectName ? <p><strong>Type of Object: </strong>{cardData.objectName}</p> : <p><strong>Type of Object: </strong>N/A</p>}  
             {cardData.objectDate ? <p><strong>Date: </strong>{cardData.objectDate}</p> : <p><strong>Date: </strong>N/A</p>}
             {cardData.classification ?<p><strong>Classification: </strong>{cardData.classification}</p> : <p><strong>Classification: </strong>N/A</p>}
             {cardData.medium ? <p><strong>Medium: </strong>{cardData.medium}</p> : <p><strong>Medium: </strong>N/A</p>}
 
             {cardData.artistDisplayName ? <p><strong>Artist: </strong>{cardData.artistDisplayName}</p> : <p><strong>Artist: </strong>N/A</p>}
+            {cardData.artistNationality ? <p><strong>Artist Nationality: </strong>{cardData.artistNationality}</p> : <p><strong>Artist Nationality: </strong>N/A</p>}
             {cardData.artistWikidata_URL ? 
                 <p>
                     <strong>Wiki: </strong>
@@ -66,6 +68,11 @@ const ArtworkCardDetail = ({objectId}) => {
                 <p><strong>Artist: </strong>N/A</p>}
             {cardData.creditLine ? <p><strong>Credit: </strong>{cardData.creditLine}</p> : <p><strong>Credit: </strong>N/A</p>}
             {cardData.dimensions ? <p><strong>Dimensions: </strong>{cardData.dimensions}</p> : <p><strong>Dimensions: </strong>N/A</p>}
+            {cardData.artistDisplayBio ? <p><strong>Artist or Display Bio: </strong>{cardData.artistDisplayBio}</p> : <p><strong>Artist or Display Bio: </strong>N/A</p>}
+
+            {cardData.department ? <p><strong>Department: </strong>{cardData.department}</p> : <p><strong>Department: </strong>N/A</p>}
+
+            
             <br></br>
             <button className='cursor-pointer px-4 py-2 border-2 rounded bg-white border-red-600 text-red-600 hover:bg-red-600 hover:text-white'>+ Favourite (added)</button>
             
