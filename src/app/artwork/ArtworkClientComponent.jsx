@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation'
 import validObjectIDList from '@/public/data/validObjectIDList.json'
 import ArtworkCard from '@/components/ArtworkCard'
 
-const Artwork = () => {
+const ArtworkClientComponent = () => {
   const [data, setData] = useState(null)
   const [artworkList, setArtworkList] = useState([])
   const [currentPage, setCurrentPage] = useState(0)
@@ -102,4 +102,4 @@ const Artwork = () => {
   )
 }
 
-export default Artwork
+export default ArtworkClientComponent
