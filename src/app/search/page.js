@@ -1,6 +1,8 @@
 'use client'
 import React, {useState} from 'react'
 import { useRouter } from 'next/navigation'
+import { addToHistory } from '@/lib/userData'
+import { toast } from 'react-toastify'
 
 const Search = () => {
 
@@ -24,22 +26,26 @@ const Search = () => {
 
         queryString += `&q=${q}`;
 
-
-        console.log('The query string is: ', queryString)
         router.push(`/artwork?${queryString}`)
 
-        // router.push(`/artwork?artistOrCulture=true&q=mother`)
+        try {
+            await addToHistory(queryString)
+            toast.success('Query Added to Search History')
+        } catch(error) {
+            toast.error(error)
+        }
+       
     }
 
   return (
-    <main className='flex flex-col items-center min-h-screen w-full pt-24 gap-6'>
-        <header className='flex flex-col border w-3/4 p-6 gap-2 rounded border-slate-600 bg-slate-50'>
+    <main className='flex flex-col items-center min-h-screen w-full pt-12 gap-6'>
+        <header className='flex flex-col border w-11/12 p-6 gap-2 rounded border-slate-600 bg-slate-50'>
             <h1 className='text-3xl'>Advanced Search</h1>
             <h2>Enter Advanced Search Criteria</h2>
         </header>
         <form
             action={submitForm}
-            className='flex flex-col rounded border border-slate-600 bg-slate-50 p-4 justify-start text-start w-3/4 gap-6'>
+            className='flex flex-col rounded border border-slate-600 bg-slate-50 p-4 justify-start text-start w-11/12 gap-6'>
             {/* Search Query Container */}
             <div className='flex flex-col'>
                 <label>Search Query</label>             

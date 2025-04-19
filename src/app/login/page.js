@@ -42,17 +42,17 @@ const Login = () => {
     }
 
   return (
-    <main className='flex flex-col min-h-screen w-full bg-white pt-24'>
+    <main className='flex flex-col min-h-screen w-full bg-white pt-12'>
       <section className='flex flex-col justify-center items-center mt-10 gap-6'>
       {/* Login Header */}
-      <header className='flex flex-col border w-3/4 p-6 gap-2 rounded border-slate-600 bg-slate-50'>
+      <header className='flex flex-col border w-11/12 p-6 gap-2 rounded border-slate-600 bg-slate-50'>
         <h1 className='text-3xl'>Login</h1>
         <h2>Enter your login information below</h2>
       </header>
 
       {/* Login Form */}
       <form 
-        className='flex flex-col border w-3/4 rounded border-slate-600 bg-slate-50'
+        className='flex flex-col border w-11/12 rounded border-slate-600 bg-slate-50'
         action={handleSubmit}>
         {/* Inputs Container */}
         <section className='flex flex-col gap-8 p-6 '>

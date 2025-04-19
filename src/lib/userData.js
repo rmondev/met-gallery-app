@@ -2,7 +2,6 @@ import { getToken } from "./authenticate";
 
 async function makeApiRequest(url, method, body = null) {
   console.log('Initiate API Request..')
-  console.log('JWT Token: ', getToken())
   const headers = {
     'content-type': 'application/json',
     'Authorization': `JWT ${getToken()}`

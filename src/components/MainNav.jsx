@@ -8,6 +8,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { AnimatePresence, motion } from 'framer-motion'
 import { removeToken, readToken } from '@/lib/authenticate';
 import { useRouter } from 'next/navigation'
+import { addToHistory } from '@/lib/userData'
+import { toast } from 'react-toastify'
 
 
 const MainNav = () => {
@@ -49,7 +51,12 @@ const MainNav = () => {
     setMobileMenuOpen(false)
     router.push(`${queryRoute}${queryString}`)
     
-    // TODO: add queryString to SearchHistory
+    try {
+        await addToHistory(queryString)
+        toast.success('Query Added to Search History')
+    } catch(error) {
+        toast.error(error)
+    }
   }
 
   const handleDropdown = () => {
