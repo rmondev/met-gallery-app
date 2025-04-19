@@ -50,7 +50,7 @@ const History = () => {
               router.push('/login') // fallback if token is invalid
             })
         }
-      }, [])
+      }, [router, searchHistory, setSearchHistory])
 
       
     

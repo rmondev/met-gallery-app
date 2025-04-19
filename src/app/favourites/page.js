@@ -31,7 +31,7 @@ const Favourites = () => {
           router.push('/login') // fallback if token is invalid
         })
     }
-  }, [])
+  }, [favouritesList, router, setFavouritesList])
 
   console.log('/favourites Render Faves:', favouritesList)
 

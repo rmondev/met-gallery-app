@@ -42,7 +42,7 @@ export default function Home() {
         <div>
           <h2 className="text-2xl font-semibold text-red-600 mb-4">Visit The Met</h2>
           <p className="text-gray-700 leading-relaxed">
-            Plan your visit to The Met in New York City. Stroll through iconic galleries, attend special exhibitions, and experience art like never before. Whether you're a lifelong art lover or a curious traveler, there's something here for everyone.
+            Dive into one of the world&#39;s largest and most diverse art collections. The Met houses over two million works spanning 5,000 years of human history. From ancient artifacts to contemporary masterpieces, discover the stories that shaped civilizations.
           </p>
         </div>
 
