@@ -9,6 +9,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { removeToken, readToken } from '@/lib/authenticate';
 import { useRouter } from 'next/navigation'
 
+
 const MainNav = () => {
   
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)

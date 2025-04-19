@@ -3,19 +3,33 @@ import React from 'react'
 import { authenticateUser } from '@/lib/authenticate'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
+import { favouritesAtom, searchHistoryAtom } from '@/store'
+import { useAtom } from 'jotai'
+import { getHistory, getFavourites } from "@/lib/userData";
 
 const Login = () => {
 
     const router = useRouter()
+    const [searchHistory, setSearchHistory ] = useAtom(searchHistoryAtom);
+    const [favouritesList, setFavouritesList ] = useAtom(favouritesAtom);
+
+    const updateAtoms = async  () => {
+        setFavouritesList(await getFavourites())
+        setSearchHistory(await getHistory())
+    }
 
     const handleSubmit = async (formData) => {
         let user = formData.get('user')
         let pass = formData.get('pass')
 
-        // console.log(`Login Info: (User): ${user} (Pass): ${pass}`)
+       
 
         try {
             await authenticateUser(user, pass)
+
+            console.log(`Before atom updated (faves): ${favouritesList} (history): ${searchHistory}`)
+            await updateAtoms()
+            console.log(`Before atom updated (faves): ${favouritesList} (history): ${searchHistory}`)
             toast.success(`${user} Successfully Logged In!`)
             router.push('/')
         } catch(error) {
