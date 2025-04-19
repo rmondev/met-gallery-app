@@ -8,8 +8,11 @@ const Favourites = () => {
 
 
     
-    const [ favouritesList, setFavouritesList ] = useAtom(favouritesAtom, [])
+    const [ favouritesList, setFavouritesList ] = useAtom(favouritesAtom)
 
+
+
+    console.log('/favourites Render Faves: ', favouritesList)
     
 
     // if( !favouritesList ) return null;

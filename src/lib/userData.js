@@ -1,6 +1,8 @@
 import { getToken } from "./authenticate";
 
 async function makeApiRequest(url, method, body = null) {
+
+  console.log('JWT Token: ', getToken())
   const headers = {
     'content-type': 'application/json',
     'Authorization': `JWT ${getToken()}`
@@ -13,14 +15,24 @@ async function makeApiRequest(url, method, body = null) {
   };
 
   const res = await fetch(url, options);
-  const data = await res.json();
+  const text = await res.text(); // try parsing as text first
+  console.log(`[${method}] ${url} → Status: ${res.status}, Raw Response:`, text);
+
+  let data;
+  try {
+    data = JSON.parse(text);
+  } catch (err) {
+    console.warn("Failed to parse JSON:", err);
+    data = null;
+  }
 
   if (res.status === 200) {
     return data;
   } else {
-    throw new Error(`Request failed with status: ${res.status}`);
+    throw new Error(`Request failed with status: ${res.status}, body: ${text}`);
   }
 }
+
 
 export async function addToFavourites(id) {
   const url = `${process.env.NEXT_PUBLIC_USER_API_URL}/favourites/${id}`;

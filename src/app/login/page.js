@@ -13,9 +13,13 @@ const Login = () => {
     const [searchHistory, setSearchHistory ] = useAtom(searchHistoryAtom);
     const [favouritesList, setFavouritesList ] = useAtom(favouritesAtom);
 
-    const updateAtoms = async  () => {
-        setFavouritesList(await getFavourites())
-        setSearchHistory(await getHistory())
+    async function updateAtoms() {
+        const faves = await getFavourites();
+        const history = await getHistory();
+        console.log("Fetched faves:", faves);
+        console.log("Fetched history:", history);
+        setFavouritesList(faves); 
+        setSearchHistory(history);
     }
 
     const handleSubmit = async (formData) => {
@@ -29,7 +33,7 @@ const Login = () => {
 
             console.log(`Before atom updated (faves): ${favouritesList} (history): ${searchHistory}`)
             await updateAtoms()
-            console.log(`Before atom updated (faves): ${favouritesList} (history): ${searchHistory}`)
+            console.log(`After atom updated (faves): ${favouritesList} (history): ${searchHistory}`)
             toast.success(`${user} Successfully Logged In!`)
             router.push('/')
         } catch(error) {

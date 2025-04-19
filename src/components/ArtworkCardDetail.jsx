@@ -1,11 +1,32 @@
 import React, {useEffect, useState} from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { useAtom } from 'jotai';
+import { favouritesAtom } from '@/store';
+import { addToFavourites } from '@/lib/userData';
+import { removeFromFavourites } from '@/lib/userData';
 
 const ArtworkCardDetail = ({objectId}) => {
 
-    const [cardData, setCardData] = useState(null)
     let router = useRouter()
+    const [cardData, setCardData] = useState(null)
+    const [ favourites, setFavourites ] = useAtom(favouritesAtom);
+    const [ showAdded, setShowAdded ] = useState(false);
+
+    useEffect(()=>{
+        setShowAdded(favourites?.includes(objectId))
+    }, [favourites, objectId])
+
+    async function favouritesClicked(){
+        // If the "showAdded" value in the state is false, then we must add the objectID (passed in "props") to the "favouritesList" 
+        if (showAdded) {
+            setFavourites(await removeFromFavourites(objectId));
+            
+        // If the "showAdded" value in the state is false, then we must add the objectID (passed in "props") to the "favouritesList"
+        } else {
+            setFavourites(await addToFavourites(objectId));
+        }
+    }
     
     useEffect(() => {
         const fetchObjectData = async () => {
@@ -25,7 +46,7 @@ const ArtworkCardDetail = ({objectId}) => {
     if (!cardData) return null
 
   return (
-    <div className='flex flex-col border-2 rounded border-red-600 justify-start items-start gap-2 p-4'>
+    <div className='flex flex-col border-2 rounded border-red-600 justify-start items-start gap-2 m-4 p-4'>
 
     <h2><strong>Title: </strong>{cardData.title || 'N/A'}</h2>
         {/* Full-size image */}
@@ -92,7 +113,22 @@ const ArtworkCardDetail = ({objectId}) => {
                 )}
             
             <br></br>
-            <button className='cursor-pointer px-4 py-2 border-2 rounded bg-white border-red-600 text-red-600 hover:bg-red-600 hover:text-white'>+ Favourite (added)</button>
+
+            {showAdded ? 
+                <button 
+                    className='cursor-pointer px-4 py-2 border-2 rounded bg-white border-red-600 text-red-600 hover:bg-red-600 hover:text-white'
+                    onClick={favouritesClicked}
+                    >
+                        + Favourite (added)
+                </button> 
+                : 
+                <button 
+                    className='cursor-pointer px-4 py-2 border-2 rounded bg-white border-red-600 text-red-600 hover:bg-red-600 hover:text-white'
+                    onClick={favouritesClicked}
+                    >
+                        + Favourite
+                </button>
+            }
             
         </section>
     </div>

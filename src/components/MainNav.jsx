@@ -215,13 +215,21 @@ const MainNav = () => {
         </>
       ) : (
         // No User Logged in (null token)
-        <section className='hidden xl:flex flex-row gap-4 justify-center items-center mr-4'>
-           <Link href="/register">
+        <section className='hidden xl:flex flex-row gap-4 justify-center items-center p-4'>
+
+
+
+          <ul className='flex justify-center items-center flex-row gap-4'>
+              <li className='text-white text-lg hover:font-semibold'><Link href='/register'>Register</Link></li>
+              <li className='text-white text-lg hover:font-semibold'><Link href='/search'>Login</Link></li>
+          </ul>
+
+           {/* <Link href="/register">
               <button className='cursor-pointer text-white text-lg hover:font-semibold'>Register</button>
             </Link>
             <Link href="/login">
               <button className='cursor-pointer text-white text-lg hover:font-semibold'>Login</button>
-            </Link>
+            </Link> */}
         </section>
       )}
           
