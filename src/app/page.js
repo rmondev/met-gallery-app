@@ -9,7 +9,10 @@ export default function Home() {
 
 
   return (
-    <main className='flex flex-col h-screen w-full bg-white'>
+
+   
+    
+    <main className='flex flex-col min-h-screen w-full bg-white pt-12'>
       {/* Title Container */}
       <div className='flex justify-center items-center text-center bg-transparent mt-10'>
           <p className='font-gideon font-bold text-red-600 text-5xl'>The Metropolitan Museum of Art</p>

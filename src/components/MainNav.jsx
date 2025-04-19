@@ -111,6 +111,12 @@ const MainNav = () => {
     router.push(route)
   }
 
+  const handleDropDownLinkClick = (route) =>{
+    handleDropdown()
+    router.push(route)
+  }
+
+
 
   useEffect(() => {
     try {
@@ -202,12 +208,21 @@ const MainNav = () => {
             {dropdownOpen &&
               <div ref={dropdownRef} className='absolute bg-white top-18 right-2 border-2 border-red-600 rounded p-2 w-[200px]'>
                 <ul>
-                  <li className='cursor-pointer p-2 border-2 font-semibold border-red-600 bg-white hover:bg-red-600 hover:text-white text-red-600 rounded m-2'>Favourites</li>
-                  <li className='cursor-pointer p-2 border-2 font-semibold border-red-600 bg-white hover:bg-red-600 hover:text-white text-red-600 rounded m-2'>Search History</li>
+                  <li className='cursor-pointer p-2 border-2 font-semibold border-red-600 bg-white hover:bg-red-600 hover:text-white text-red-600 rounded m-2'
+                    onClick={() => handleDropDownLinkClick('/favourites')}
+                  >
+                    Favourites
+                  </li>
+                  <li className='cursor-pointer p-2 border-2 font-semibold border-red-600 bg-white hover:bg-red-600 hover:text-white text-red-600 rounded m-2'
+                    onClick={() => handleDropDownLinkClick('/history')}
+                  >
+                    Search History
+                  </li>
                   <li className='cursor-pointer p-2 border-2 font-semibold border-red-600 bg-white hover:bg-red-600 hover:text-white text-red-600 rounded m-2'
                     onClick={logOut}
-                    >
-                      Logout</li>
+                  >
+                    Logout
+                  </li>
                 </ul>
               </div>
             }
@@ -221,7 +236,7 @@ const MainNav = () => {
 
           <ul className='flex justify-center items-center flex-row gap-4'>
               <li className='text-white text-lg hover:font-semibold'><Link href='/register'>Register</Link></li>
-              <li className='text-white text-lg hover:font-semibold'><Link href='/search'>Login</Link></li>
+              <li className='text-white text-lg hover:font-semibold'><Link href='/login'>Login</Link></li>
           </ul>
 
            {/* <Link href="/register">

@@ -1,7 +1,7 @@
 import { getToken } from "./authenticate";
 
 async function makeApiRequest(url, method, body = null) {
-
+  console.log('Initiate API Request..')
   console.log('JWT Token: ', getToken())
   const headers = {
     'content-type': 'application/json',
@@ -20,6 +20,7 @@ async function makeApiRequest(url, method, body = null) {
 
   let data;
   try {
+    console.log('Data Received!')
     data = JSON.parse(text);
   } catch (err) {
     console.warn("Failed to parse JSON:", err);

@@ -32,7 +32,7 @@ const Search = () => {
     }
 
   return (
-    <main className='flex flex-col items-center h-screen w-full mt-10 gap-6'>
+    <main className='flex flex-col items-center min-h-screen w-full pt-24 gap-6'>
         <header className='flex flex-col border w-3/4 p-6 gap-2 rounded border-slate-600 bg-slate-50'>
             <h1 className='text-3xl'>Advanced Search</h1>
             <h2>Enter Advanced Search Criteria</h2>

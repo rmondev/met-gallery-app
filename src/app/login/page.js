@@ -42,7 +42,7 @@ const Login = () => {
     }
 
   return (
-    <main className='flex flex-col h-screen w-full bg-white'>
+    <main className='flex flex-col min-h-screen w-full bg-white pt-24'>
       <section className='flex flex-col justify-center items-center mt-10 gap-6'>
       {/* Login Header */}
       <header className='flex flex-col border w-3/4 p-6 gap-2 rounded border-slate-600 bg-slate-50'>
@@ -87,7 +87,7 @@ const Login = () => {
 
             {/* Submit Button Container */}
             <div>
-                <button type='submit' className='text-red-600 hover:text-white border-2 rounded mr-2 w-30 border-red-600 bg-white hover:bg-red-600  h-10'>
+                <button type='submit' className='cursor-pointer text-red-600 hover:text-white border-2 rounded mr-2 w-30 border-red-600 bg-white hover:bg-red-600  h-10'>
                     Login
                 </button>
             </div>
